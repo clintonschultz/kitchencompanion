@@ -15,11 +15,11 @@ efficient and enjoyable.
 - 🔥 **Hands-Free Mode** – Use voice commands to navigate while cooking.
 
 ## 🛠️ Tech Stack
-- **Platform:** Flutter (port to Android and iOS)
-- **Database:** (TBD – Core Data, Firebase, or other options)
-- **APIs:** (Planned integration for recipe search, nutrition, etc.)
+- **Platform:** Flutter
+- **Database:** Firebase
+- **APIs:** spoonacular API (Planned integration for recipe search, nutrition, etc.)
 
 ## 📌 Getting Started
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/kitchen-companion.git
+   git clone https://github.com/clintonschultz/kitchen-companion.git
