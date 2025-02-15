@@ -1,6 +1,6 @@
-# 🍳 Kitchen Companion App
+# 🍳 BiteWise App
 
-The **Kitchen Companion App** is designed to help you streamline your cooking experience, 
+The **Bitewise App** is designed to help you streamline your cooking experience, 
 whether you're meal-prepping, cooking dinner, or learning new culinary techniques. This 
 app provides useful tools, tips, and resources to make your time in the kitchen more 
 efficient and enjoyable.
