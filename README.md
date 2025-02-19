@@ -15,8 +15,8 @@ efficient and enjoyable.
 - 🔥 **Hands-Free Mode** – Use voice commands to navigate while cooking.
 
 ## 🛠️ Tech Stack
-- **Platform:** Flutter
-- **Database:** Firebase
+- **Platform:** Kotlin Multiplatform Mobile
+- **Database:** TBD
 - **APIs:** spoonacular API (Planned integration for recipe search, nutrition, etc.)
 
 ## 📌 Getting Started
