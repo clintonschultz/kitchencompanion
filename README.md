@@ -15,9 +15,9 @@ efficient and enjoyable.
 - 🔥 **Hands-Free Mode** – Use voice commands to navigate while cooking.
 
 ## 🛠️ Tech Stack
-- **Platform:** Kotlin Multiplatform Mobile
+- **Platform:** iOS Native
 - **Database:** TBD
-- **APIs:** spoonacular API (Planned integration for recipe search, nutrition, etc.)
+- **APIs:** TBD (Planned integration for recipe search, nutrition, etc.)
 
 ## 📌 Getting Started
 1. Clone the repository:
