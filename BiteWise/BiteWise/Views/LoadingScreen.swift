@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoadingScreen: View {
-    @State private var isLoadingComplete = false  // State to track if loading is complete
+    @State private var isLoadingComplete = false
 
     var body: some View {
         VStack {
@@ -18,7 +18,7 @@ struct LoadingScreen: View {
             } else {
                 logo()
                     .padding()
-                // Show a loading indicator (e.g., spinner) while waiting
+                // Show a loading indicator while waiting
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
                     .padding()
@@ -36,7 +36,7 @@ struct LoadingScreen: View {
     }
 
     @ViewBuilder
-    func logo() -> some View {
+    private func logo() -> some View {
         VStack(alignment: .center, spacing: 8.0) {
             Image(systemName: "clock.fill")
                 .resizable()

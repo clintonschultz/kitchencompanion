@@ -1,5 +1,5 @@
 //
-//  RecipesSearch.swift
+//  LocalRecipesSearch.swift
 //  BiteWise
 //
 //  Created by Clinton Schultz on 3/23/25.
@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct RecipesSearch: View {
+struct LocalRecipesSearch: View {
     @State private var searchQuery: String = ""  // Store the search query entered by the user
-    @State private var recipes: [String] = []  // Store search results (currently an empty array)
+    @State private var searchedRecipes: [Recipe] = []  // Store search results (currently an empty array)
     @State private var isSearching = false  // Track search state (loading indicator)
     @State private var isNavigationActive = false // Used to trigger the navigation link to add recipe screen
+    
+    var viewModel: LocalRecipesSearchViewModel
 
     var body: some View {
         NavigationView {
@@ -20,12 +22,11 @@ struct RecipesSearch: View {
                     .padding(8.0)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding([.leading, .trailing])
-                    .onChange(of: searchQuery) { newQuery in
-                        // Trigger the search whenever the query changes
-                        if !newQuery.isEmpty {
-                            searchRecipes(query: newQuery)
+                    .onChange(of: searchQuery) {
+                        if !searchQuery.isEmpty {
+                            searchRecipes(query: searchQuery)
                         } else {
-                            recipes = []  // Clear results if the search query is empty
+                            searchedRecipes = []
                         }
                     }
 
@@ -50,11 +51,22 @@ struct RecipesSearch: View {
                         .padding()
                 }
 
-                // List of Recipes (Results will be shown here once the search is complete)
-                List(recipes, id: \.self) { recipe in
-                    Text(recipe)  // This is where the search results will be displayed
+                if !searchedRecipes.isEmpty {
+                    List(searchedRecipes, id: \.self) { recipe in
+                        VStack(alignment: .leading) {
+                            Text("Name: \(recipe.name)")
+                            Text("Ingredients: \(recipe.ingredients)")
+                            Text("Instructions: \(recipe.instructions)")
+                        }
+                    }
+                    .id(UUID())
+                    .padding()
                 }
-                .padding()
+                
+                if searchedRecipes.isEmpty && !searchQuery.isEmpty {
+                    Text("No recipes matched your search.")
+                        .padding()
+                }
 
                 Spacer()  // To push content up and fill screen
             }
@@ -67,69 +79,25 @@ struct RecipesSearch: View {
         }
 
         NavigationLink(
-            destination: AddRecipeForm(),
+            destination: AddLocalRecipeForm(viewModel: viewModel),
             isActive: $isNavigationActive,
             label: { EmptyView() }
         )
     }
 
     // Function to simulate searching (replace with real data fetching logic later)
-    func searchRecipes(query: String) {
+    private func searchRecipes(query: String) {
         // Simulate loading state until data is hooked up
         isSearching = true
 
         // Simulate a delay for search operation (replace this with actual API call later)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            // Example data for development
-            if query.lowercased() == "pizza" {
-                recipes = ["Margherita Pizza", "Pepperoni Pizza", "Vegetarian Pizza"]
-            } else if query.lowercased() == "pasta" {
-                recipes = ["Spaghetti Carbonara", "Penne Arrabbiata", "Fettuccine Alfredo"]
-            } else {
-                recipes = []  // No results found
-            }
+            searchedRecipes = self.viewModel.recipes.filter { $0.name.lowercased().contains(query.lowercased()) }
             isSearching = false  // Hide loading indicator after "searching"
         }
     }
 }
 
 #Preview {
-    RecipesSearch()
+    LocalRecipesSearch(viewModel: LocalRecipesSearchViewModel())
 }
-
-
-//import SwiftUI
-//
-//struct RecipesSearch: View {
-//    @State private var isNavigationActive = false
-//
-//    var body: some View {
-//        NavigationView {
-//            VStack(alignment: .leading) {
-//                HStack(alignment: .center) {
-//                    Text("Search For Recipes")
-//                        .padding()
-//                    Spacer()
-//                }
-//                Spacer()
-//                
-//            }
-//            .navigationBarTitle("Recipes", displayMode: .inline)
-//            .navigationBarItems(trailing: Button(action: {
-//                isNavigationActive = true
-//            }) {
-//                Image(systemName: "plus")
-//            })
-//        }
-//
-//        NavigationLink(
-//            destination: AddRecipeForm(),
-//            isActive: $isNavigationActive,
-//            label: { EmptyView() }
-//        )
-//    }
-//}
-//
-//#Preview {
-//    RecipesSearch()
-//}

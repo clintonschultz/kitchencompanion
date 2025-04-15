@@ -1,5 +1,5 @@
 //
-//  AddRecipeForm.swift
+//  AddLocalRecipeForm.swift
 //  BiteWise
 //
 //  Created by Clinton Schultz on 3/23/25.
@@ -7,19 +7,13 @@
 
 import SwiftUI
 
-struct Recipe: Identifiable {
-    var id = UUID()  // Unique identifier for each recipe
-    var name: String
-    var ingredients: String
-    var instructions: String
-}
-
-struct AddRecipeForm: View {
-    @State private var recipes: [Recipe] = []
+struct AddLocalRecipeForm: View {
     @State private var recipeName: String = ""
     @State private var ingredients: String = ""
     @State private var instructions: String = ""
-    @State private var isRecipeSaved: Bool = false  // Track if the recipe was saved
+    @State private var isRecipeSaved: Bool = false
+    
+    var viewModel: LocalRecipesSearchViewModel
 
     var body: some View {
         NavigationView {
@@ -67,8 +61,8 @@ struct AddRecipeForm: View {
                 }
 
                 // List of saved recipes
-                if !recipes.isEmpty {
-                    List(recipes) { recipe in
+                if !viewModel.recipes.isEmpty {
+                    List(viewModel.recipes) { recipe in
                         VStack(alignment: .leading) {
                             Text(recipe.name)
                                 .font(.headline)
@@ -88,21 +82,19 @@ struct AddRecipeForm: View {
                         .padding()
                 }
 
-                Spacer()  // Ensure the content is pushed up, and the bottom is not blank
+                Spacer()
             }
             .navigationBarTitle("Create Recipe", displayMode: .inline)
         }
     }
 
-    // Function to save the recipe
     func saveRecipe() {
         let newRecipe = Recipe(name: recipeName, ingredients: ingredients, instructions: instructions)
-        recipes.append(newRecipe)  // Add the new recipe to the array
-        resetForm()  // Reset the form for the next recipe
+        viewModel.saveRecipe(newRecipe: newRecipe)
+        resetForm()
         isRecipeSaved = true
     }
 
-    // Function to reset the form after saving
     func resetForm() {
         recipeName = ""
         ingredients = ""
@@ -111,5 +103,5 @@ struct AddRecipeForm: View {
 }
 
 #Preview {
-    AddRecipeForm()
+    AddLocalRecipeForm(viewModel: LocalRecipesSearchViewModel())
 }
