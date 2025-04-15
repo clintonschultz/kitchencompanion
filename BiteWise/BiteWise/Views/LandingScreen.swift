@@ -19,7 +19,7 @@ struct LandingScreen: View {
                     }
 
                     NavigationLink(destination: LocalRecipesSearch(viewModel: LocalRecipesSearchViewModel())) {
-                        Text("Recipes")
+                        Text("Saved Recipes")
                             .foregroundColor(.blue)
                             .padding()
                             .background(Capsule().fill(Color.blue.opacity(0.1)))

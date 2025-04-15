@@ -22,12 +22,11 @@ struct LocalRecipesSearch: View {
                     .padding(8.0)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding([.leading, .trailing])
-                    .onChange(of: searchQuery) { newQuery in
-                        // Trigger the search whenever the query changes
-                        if !newQuery.isEmpty {
-                            searchRecipes(query: newQuery)
+                    .onChange(of: searchQuery) {
+                        if !searchQuery.isEmpty {
+                            searchRecipes(query: searchQuery)
                         } else {
-                            searchedRecipes = []  // Clear results if the search query is empty
+                            searchedRecipes = []
                         }
                     }
 
