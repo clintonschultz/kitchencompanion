@@ -18,7 +18,7 @@ struct LandingScreen: View {
                         Spacer()
                     }
 
-                    NavigationLink(destination: RecipesSearch()) {
+                    NavigationLink(destination: LocalRecipesSearch(viewModel: LocalRecipesSearchViewModel())) {
                         Text("Recipes")
                             .foregroundColor(.blue)
                             .padding()
@@ -28,7 +28,7 @@ struct LandingScreen: View {
                     Spacer()
                 }
                 .padding()
-                .navigationBarTitle("Home", displayMode: .inline)  // Navigation bar title
+                .navigationBarTitle("Home", displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
                     print("Edit button pressed")
                 }) {
